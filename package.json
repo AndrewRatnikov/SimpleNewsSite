@@ -1,0 +1,8 @@
+{
+  "name": "SimpleNewsSite",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/AndrewRatnikov/SimpleNewsSite.git",
+  "author": "Andrew Ratnikov <ratnikov.am@gmail.com>",
+  "license": "MIT"
+}
