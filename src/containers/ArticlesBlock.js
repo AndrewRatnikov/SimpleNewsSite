@@ -1,14 +1,27 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import ArticleList from './ArticleList';
 
-const ArticlesBlock = () => {
+const ArticlesBlock = props => {
     return (
         <div className="news-articles">
             <h1 className="news-articles__title">Articles List</h1>
-            <ArticleList />
+            <ArticleList {...props} />
         </div>
     )
 };
 
-export default ArticlesBlock;
+const mapStateToProps = state => {
+    return {
+        source: state.articlesReducer
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        dispatch
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ArticlesBlock);

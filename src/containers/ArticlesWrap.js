@@ -14,7 +14,7 @@ export default ChildComponent => {
 
         render() {
             return (
-                this.hasError() ? <ChildComponent /> : this.errorBlock()
+                this.hasError() ? <ChildComponent {...this.props} /> : this.errorBlock()
             )
         }
     }

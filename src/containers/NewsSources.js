@@ -2,12 +2,16 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ScrollArea from 'react-custom-scrollbars';
 
-import { getNewsSources } from '../controllers';
+import { getNewsSources, getArticlesFromSource } from '../controllers';
 import NewsSource from '../components/NewsSource';
 
 class NewsSources extends Component {
     componentDidMount() {
         getNewsSources();
+    }
+
+    sourceOnclickHandler(source) {
+        getArticlesFromSource(source);
     }
 
     render() {
@@ -16,7 +20,12 @@ class NewsSources extends Component {
                 <h1 className="news-sources__title">News Sources</h1>
                 <div className="news-sources__list">
                     <ScrollArea>
-                        {this.props.sources.map(source => <NewsSource key={source.id} source={source} />)}
+                        {this.props.sources.map(source => {
+                            return <NewsSource key={source.id}
+                                               source={source}
+                                               onClickHandler={this.sourceOnclickHandler}
+                            />
+                        })}
                     </ScrollArea>
                 </div>
             </div>

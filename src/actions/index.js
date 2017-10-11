@@ -9,7 +9,7 @@ export const newsSourcesToStore = sources => {
 
 export const articlesToStore = ({ articles, sortBy, source }) => {
     return {
-        type: GET_ARTICLES,
+        type: constants.GET_ARTICLES,
         articles,
         sortBy,
         source
