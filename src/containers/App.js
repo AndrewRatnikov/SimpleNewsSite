@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 
 import store from '../store';
 import NewsSources from './NewsSources';
-import ArticlesList from './ArticlesList';
+import ArticlesBlock from './ArticlesBlock';
 
 import '../assets/styles/main.scss';
 
@@ -13,7 +13,7 @@ export default class App extends Component {
             <Provider store={store}>
                 <div className="main-container">
                     <NewsSources />
-                    <ArticlesList />
+                    <ArticlesBlock />
                 </div>
             </Provider>
         )

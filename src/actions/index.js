@@ -1,8 +1,17 @@
 import constants from '../constants';
 
-export const NewsSourcesToStore = sources => {
+export const newsSourcesToStore = sources => {
     return {
         type: constants.GET_NEWS_SOURCES,
         sources
     };
+};
+
+export const articlesToStore = ({ articles, sortBy, source }) => {
+    return {
+        type: GET_ARTICLES,
+        articles,
+        sortBy,
+        source
+    }
 };
