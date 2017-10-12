@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { newsSourcesToStore, articlesToStore, filtersToStore } from '../actions'
+import { newsSourcesToStore, articlesToStore, filtersToStore, articlesErrorToStore } from '../actions'
 import store from '../store';
 
 const API_KEY = '5f1a272a422747cc890a8f8fa9ca0380';
@@ -13,15 +13,24 @@ export const getNewsSources = () => {
 };
 
 export const getArticlesFromSource = (source, filter) => {
-    const url = `https://newsapi.org/v1/articles?source=${source}${filter ? `&sortBy=${filter}` : ''}&apiKey=${API_KEY}`;
-    axios.get(url)
-        .then(response => {
-            if (response.data.status === 'ok') {
-                store.dispatch( articlesToStore(response.data) )
-            } else {
-                // TODO: add dispatch for error
-            }
-        })
+    const articles = JSON.parse(localStorage.getItem(source));
+    const min20 = 20 * 60 * 1000;
+    if (articles) {
+        const oldDate = (new Date(articles.date)).getTime();
+        const currentDate = (new Date()).getTime();
+        if (currentDate - oldDate < min20) store.dispatch( articlesToStore(articles.data) );
+    } else {
+        const url = `https://newsapi.org/v1/articles?source=${source}${filter ? `&sortBy=${filter}` : ''}&apiKey=${API_KEY}`;
+        axios.get(url)
+            .then(response => {
+                store.dispatch(articlesToStore(response.data));
+                const newArticles = JSON.stringify({data: response.data, date: new Date()});
+                localStorage.setItem(source, newArticles);
+            })
+            .catch(error => {
+                store.dispatch(articlesErrorToStore())
+            });
+    }
 };
 
 export const setFilterItems = filters => {

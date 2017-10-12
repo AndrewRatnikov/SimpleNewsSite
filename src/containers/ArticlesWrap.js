@@ -3,18 +3,18 @@ import React, { Component } from 'react';
 export default ChildComponent => {
     return class extends Component {
         hasError() {
-            return true;
+            return this.props.source.error;
         }
 
         errorBlock() {
             return (
-                <div>Load resource failed</div>
+                <div className="error-block">Load resource failed.</div>
             )
         }
 
         render() {
             return (
-                this.hasError() ? <ChildComponent {...this.props} /> : this.errorBlock()
+                this.hasError() ? this.errorBlock() : <ChildComponent {...this.props} />
             )
         }
     }

@@ -14,9 +14,10 @@ class ArticlesList extends Component {
     }
 
     render() {
+        const souceKey = this.props.source.source || 'articles';
         return ([
             <ArticlesFilter key="filter" filters={this.props.filters} activeFilter={this.props.source.sortBy} filterOnclick={this.onclickFilterHandler.bind(this)} />,
-            <div key={this.props.source.source} className="news-articles__list">
+            <div key={souceKey} className="news-articles__list">
                 <ScrollArea>
                     {this.props.source.articles.map((article, id) => <Article key={id} article={article} />)}
                 </ScrollArea>

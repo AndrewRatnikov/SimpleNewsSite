@@ -127,3 +127,13 @@ body {
 .filter-item--active {
     border-color: black;
 }
+
+.error-block {
+    font-size: 2em;
+    text-align: center;
+    color: white;
+    margin: 20px;
+    border-radius: 5px;
+    padding: 20px;
+    background-color: darkred;
+}

@@ -16,6 +16,13 @@ export const articlesToStore = ({ articles, sortBy, source }) => {
     }
 };
 
+export const articlesErrorToStore = () => {
+    return {
+        type: constants.ARTICLES_ERROR,
+        error: true
+    };
+};
+
 export const filtersToStore = filters => {
     return {
         type: constants.SET_FILTERS,

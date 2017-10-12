@@ -7,7 +7,13 @@ const articlesReducer = (state = {}, action) => {
                 ...state,
                 sortBy: action.sortBy,
                 articles: action.articles,
-                source: action.source
+                source: action.source,
+                error: false
+            };
+        case constants.ARTICLES_ERROR:
+            return {
+                ...state,
+                error: action.error
             };
         default:
             return {

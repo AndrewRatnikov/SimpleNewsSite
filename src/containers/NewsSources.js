@@ -24,6 +24,7 @@ class NewsSources extends Component {
                         {this.props.sources.map(source => {
                             return <NewsSource key={source.id}
                                                source={source}
+                                               currentSource={this.props.article.source}
                                                onClickHandler={this.sourceOnclickHandler}
                             />
                         })}
@@ -36,7 +37,8 @@ class NewsSources extends Component {
 
 const mapStateToProps = state => {
     return {
-        sources: state.sourcesReducer
+        sources: state.sourcesReducer,
+        article: state.articlesReducer,
     };
 };
 
