@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ScrollArea from 'react-custom-scrollbars';
 
-import { getNewsSources, getArticlesFromSource } from '../controllers';
+import { getNewsSources, getArticlesFromSource, setFilterItems } from '../controllers';
 import NewsSource from '../components/NewsSource';
 
 class NewsSources extends Component {
@@ -10,8 +10,9 @@ class NewsSources extends Component {
         getNewsSources();
     }
 
-    sourceOnclickHandler(source) {
-        getArticlesFromSource(source);
+    sourceOnclickHandler({ id, sortBysAvailable }) {
+        setFilterItems(sortBysAvailable);
+        getArticlesFromSource(id);
     }
 
     render() {

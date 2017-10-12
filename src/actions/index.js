@@ -15,3 +15,10 @@ export const articlesToStore = ({ articles, sortBy, source }) => {
         source
     }
 };
+
+export const filtersToStore = filters => {
+    return {
+        type: constants.SET_FILTERS,
+        filters
+    };
+};

@@ -14,7 +14,8 @@ const ArticlesBlock = props => {
 
 const mapStateToProps = state => {
     return {
-        source: state.articlesReducer
+        source: state.articlesReducer,
+        filters: state.filtersReducer
     };
 };
 
