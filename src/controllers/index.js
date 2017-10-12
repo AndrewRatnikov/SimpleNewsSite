@@ -15,7 +15,7 @@ export const getNewsSources = () => {
 export const getArticlesFromSource = (source, filter) => {
     const articles = JSON.parse(localStorage.getItem(source));
     const min20 = 20 * 60 * 1000;
-    if (articles) {
+    if (articles && articles.filter === filter) {
         const oldDate = (new Date(articles.date)).getTime();
         const currentDate = (new Date()).getTime();
         if (currentDate - oldDate < min20) store.dispatch( articlesToStore(articles.data) );
@@ -24,7 +24,7 @@ export const getArticlesFromSource = (source, filter) => {
         axios.get(url)
             .then(response => {
                 store.dispatch(articlesToStore(response.data));
-                const newArticles = JSON.stringify({data: response.data, date: new Date()});
+                const newArticles = JSON.stringify({data: response.data, date: new Date(), filter});
                 localStorage.setItem(source, newArticles);
             })
             .catch(error => {
