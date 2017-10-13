@@ -18,19 +18,18 @@ export const getArticlesFromSource = (source, filter) => {
     if (articles && articles.filter === filter) {
         const oldDate = (new Date(articles.date)).getTime();
         const currentDate = (new Date()).getTime();
-        if (currentDate - oldDate < min20) store.dispatch( articlesToStore(articles.data) );
-    } else {
-        const url = `https://newsapi.org/v1/articles?source=${source}${filter ? `&sortBy=${filter}` : ''}&apiKey=${API_KEY}`;
-        axios.get(url)
-            .then(response => {
-                store.dispatch(articlesToStore(response.data));
-                const newArticles = JSON.stringify({data: response.data, date: new Date(), filter});
-                localStorage.setItem(source, newArticles);
-            })
-            .catch(error => {
-                store.dispatch(articlesErrorToStore())
-            });
+        if (currentDate - oldDate < min20) return store.dispatch(articlesToStore(articles.data));
     }
+    const url = `https://newsapi.org/v1/articles?source=${source}${filter ? `&sortBy=${filter}` : ''}&apiKey=${API_KEY}`;
+    axios.get(url)
+        .then(response => {
+            store.dispatch(articlesToStore(response.data));
+            const newArticles = JSON.stringify({data: response.data, date: new Date(), filter});
+            localStorage.setItem(source, newArticles);
+        })
+        .catch(error => {
+            store.dispatch(articlesErrorToStore())
+        });
 };
 
 export const setFilterItems = filters => {
